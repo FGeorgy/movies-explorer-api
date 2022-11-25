@@ -10,9 +10,9 @@ const { requestLogger, errorLogger } = require('./middlewares/loggers');
 const errorHandler = require('./middlewares/errors');
 const rateLimiter = require('./middlewares/rateLimiter');
 const allowedCors = require('./utils/constants');
-const { MONGO_URI, PORT } = require('./utils/envConfig');
+const { MONGO_URL, PORT } = require('./utils/envConfig');
 
-mongoose.connect(MONGO_URI, {
+mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
 });
 
