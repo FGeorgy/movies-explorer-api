@@ -1,3 +1,5 @@
+const urlRegex = /^(https?:\/\/)?([\w-]{1,32}\.[\w-]{1,32})[^\s@]*/;
+
 const allowedCors = [
   'https://diploma.fgeorg.nomoredomains.club',
   'http://diploma.fgeorg.nomoredomains.club',
@@ -7,4 +9,4 @@ const allowedCors = [
   'http://localhost:3001',
 ];
 
-module.exports = { allowedCors };
+module.exports = { urlRegex, allowedCors };
