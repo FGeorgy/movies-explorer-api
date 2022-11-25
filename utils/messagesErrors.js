@@ -12,6 +12,8 @@ const ID_INVALID = 'Невалидный id';
 
 const UNAUTHORIZED = 'Ошибка авторизации';
 
+const INCORRECT_LOGIN = 'Неправильная почта или пароль';
+
 const SERVER_ERROR = 'На сервере произошла ошибка';
 
 const VALIDATION_ERROR = 'ValidationError';
@@ -30,6 +32,7 @@ module.exports = {
   FORBIDDEN,
   ID_INVALID,
   UNAUTHORIZED,
+  INCORRECT_LOGIN,
   SERVER_ERROR,
   VALIDATION_ERROR,
   CAST_ERROR,

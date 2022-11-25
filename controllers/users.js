@@ -10,11 +10,11 @@ const UnauthorizedError = require('../utils/errors/unauthorized-error');
 const { CREATED } = require('../utils/statusErrors');
 const {
   USER_NOT_FOUND,
-  CONFLICT_ERROR,
+  USER_CONFLICT_ERROR,
   VALIDATION_ERROR,
   INVALID_DATA,
   SUCCESS,
-  UNAUTHORIZED,
+  INCORRECT_LOGIN,
 } = require('../utils/messagesErrors');
 
 const { NODE_ENV, JWT_SECRET } = process.env;
@@ -45,7 +45,7 @@ module.exports.createUser = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictError(CONFLICT_ERROR));
+        next(new ConflictError(USER_CONFLICT_ERROR));
         return;
       }
       if (err.name === VALIDATION_ERROR) {
@@ -72,7 +72,7 @@ module.exports.updateUserInfo = (req, res, next) => {
     })
     .catch((err) => {
       if (err.code === 11000) {
-        next(new ConflictError(CONFLICT_ERROR));
+        next(new ConflictError(USER_CONFLICT_ERROR));
         return;
       }
       if (err.name === VALIDATION_ERROR) {
@@ -99,7 +99,7 @@ module.exports.login = (req, res, next) => {
         sameSite: true,
       }).send({ message: SUCCESS });
     })
-    .catch(() => next(new UnauthorizedError(UNAUTHORIZED)));
+    .catch(() => next(new UnauthorizedError(INCORRECT_LOGIN)));
 };
 
 module.exports.logout = (req, res, next) => {

@@ -1,4 +1,3 @@
-require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const { errors } = require('celebrate');
@@ -11,8 +10,7 @@ const { requestLogger, errorLogger } = require('./middlewares/loggers');
 const errorHandler = require('./middlewares/errors');
 const rateLimiter = require('./middlewares/rateLimiter');
 const allowedCors = require('./utils/constants');
-
-const { MONGO_URI, PORT = 3000 } = process.env;
+const { MONGO_URI, PORT } = require('./utils/envConfig');
 
 mongoose.connect(MONGO_URI, {
   useNewUrlParser: true,

@@ -48,7 +48,9 @@ module.exports.createMovie = (req, res, next) => {
     nameEN,
     owner,
   })
-    .then((movie) => res.status(CREATED).send(movie))
+    .then((movie) => {
+      res.status(CREATED).send(movie);
+    })
     .catch((err) => {
       if (err.name === VALIDATION_ERROR) {
         next(new BadRequestError(INVALID_DATA));
@@ -65,7 +67,7 @@ module.exports.deleteMovie = (req, res, next) => {
       if (!movie) {
         throw new NotFoundError(MOVIE_NOT_FOUND);
       }
-      if (JSON.stringify(movie.owner) !== JSON.stringify(req.user._id)) {
+      if (movie.owner.toString() !== req.user._id.toString()) {
         throw new ForbiddenError(FORBIDDEN);
       }
       return Movie.remove(movie);
