@@ -18,13 +18,7 @@ mongoose.connect(MONGO_URL, {
 
 const app = express();
 
-app.use(cors({
-  credentials: true,
-  origin: [
-    'http://localhost:3000',
-  ],
-  // origin: allowedCors,
-}));
+app.use(cors());
 
 app.use(requestLogger);
 app.use(rateLimiter);
