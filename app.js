@@ -3,14 +3,13 @@ const mongoose = require('mongoose');
 const { errors } = require('celebrate');
 const cookieParser = require('cookie-parser');
 const helmet = require('helmet');
-const cors = require('cors');
 
 const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/loggers');
 const errorHandler = require('./middlewares/errors');
 const rateLimiter = require('./middlewares/rateLimiter');
-// const allowedCors = require('./utils/constants');
 const { MONGO_URL, PORT } = require('./utils/envConfig');
+const cors = require('./middlewares/cors');
 
 mongoose.connect(MONGO_URL, {
   useNewUrlParser: true,
@@ -18,7 +17,7 @@ mongoose.connect(MONGO_URL, {
 
 const app = express();
 
-app.use(cors());
+app.use(cors);
 
 app.use(requestLogger);
 app.use(rateLimiter);
