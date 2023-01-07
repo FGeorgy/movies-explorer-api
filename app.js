@@ -9,7 +9,7 @@ const routes = require('./routes/index');
 const { requestLogger, errorLogger } = require('./middlewares/loggers');
 const errorHandler = require('./middlewares/errors');
 const rateLimiter = require('./middlewares/rateLimiter');
-const allowedCors = require('./utils/constants');
+// const allowedCors = require('./utils/constants');
 const { MONGO_URL, PORT } = require('./utils/envConfig');
 
 mongoose.connect(MONGO_URL, {
@@ -28,7 +28,11 @@ app.use(helmet());
 
 app.use(cors({
   credentials: true,
-  origin: allowedCors,
+  origin: [
+    'https://localhost:3000',
+    'http://localhost:3000',
+  ],
+  // origin: allowedCors,
 }));
 
 app.use(routes);
