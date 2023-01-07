@@ -18,6 +18,11 @@ mongoose.connect(MONGO_URL, {
 
 const app = express();
 
+app.use(cors({
+  credentials: true,
+  origin: allowedCors,
+}));
+
 app.use(requestLogger);
 app.use(rateLimiter);
 
@@ -25,11 +30,6 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(helmet());
-
-app.use(cors({
-  credentials: true,
-  origin: allowedCors,
-}));
 
 app.use(routes);
 
